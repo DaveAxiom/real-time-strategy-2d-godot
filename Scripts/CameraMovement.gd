@@ -25,10 +25,12 @@ onready var rectd = $'../UI/Base/draw_rect'
 
 signal area_selected
 signal start_move_selection
+signal deselect_all
 
 func _ready():
 	connect("area_selected", get_parent(), "area_selected", [self])
 	connect("start_move_selection", get_parent(), "start_move_selection", [self])
+	connect("deselect_all", get_parent(), "deselect_all")
 
 
 func _process(delta):
@@ -112,6 +114,8 @@ func _input(event):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			zooming = true
+			if event.button_index == BUTTON_LEFT:
+				emit_signal("deselect_all")
 			if event.button_index == BUTTON_WHEEL_UP:
 				zoomfactor -= 0.01 * zoomspeed
 			if event.button_index == BUTTON_WHEEL_DOWN:
