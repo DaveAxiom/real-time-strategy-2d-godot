@@ -59,5 +59,5 @@ func _on_unit_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:
 		if event.is_pressed():
 			if event.button_index == BUTTON_LEFT:
-				set_selected(not selected)
+				set_selected(true)
 
